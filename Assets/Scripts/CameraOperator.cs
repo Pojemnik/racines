@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
+
 public class CameraOperator : MonoBehaviour
 {
     [Header("Setup")]
-    [SerializeField]
-    public GameObject Self;
     [SerializeField]
     public float SpeedX;
     [SerializeField]
@@ -17,42 +17,41 @@ public class CameraOperator : MonoBehaviour
     public float TopRotationLimit;
     [SerializeField]
     public float BottomRotationLimit;
+    [SerializeField]
+    public float ZoomStep;
+    [SerializeField]
+    public float MinimalZoom;
+    [SerializeField]
+    public float MaximalZoom;
 
+    Camera selfCamera;
     Vector3 mouse;
     
     void Start()
     {
-        
+        selfCamera = GetComponent<Camera>();
     }
     void Update()
     {
         Vector3 movement = new Vector3();
-        float rotationX = Self.transform.root.rotation.eulerAngles.x;
-        float rotationY = Self.transform.root.rotation.eulerAngles.y;
+        float rotationX = transform.rotation.eulerAngles.x;
+        float rotationY = transform.rotation.eulerAngles.y;
 
         if (Input.GetKey(KeyCode.W))
         {
-            movement += Quaternion.Euler(0, Self.transform.root.rotation.eulerAngles.y, Self.transform.root.rotation.eulerAngles.z) * new Vector3(0, 0, SpeedY * Time.deltaTime);
-
-            //movement.z += SpeedY * Time.deltaTime;
+            movement += Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z) * new Vector3(0, 0, SpeedY * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            movement += Quaternion.Euler(0, Self.transform.root.rotation.eulerAngles.y, Self.transform.root.rotation.eulerAngles.z) * new Vector3(-SpeedX * Time.deltaTime, 0, 0);
-
-            //movement.x -= SpeedX * Time.deltaTime;
+            movement += Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z) * new Vector3(-SpeedX * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            movement += Quaternion.Euler(0, Self.transform.root.rotation.eulerAngles.y, Self.transform.root.rotation.eulerAngles.z) * new Vector3(0, 0, -SpeedY * Time.deltaTime);
-
-            //movement.z -= SpeedY * Time.deltaTime;
+            movement += Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z) * new Vector3(0, 0, -SpeedY * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            movement += Quaternion.Euler(0, Self.transform.root.rotation.eulerAngles.y, Self.transform.root.rotation.eulerAngles.z) * new Vector3(SpeedX * Time.deltaTime, 0, 0);
-
-            //movement.x += SpeedX * Time.deltaTime;
+            movement += Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z) * new Vector3(SpeedX * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -67,8 +66,23 @@ public class CameraOperator : MonoBehaviour
                 rotationX = BottomRotationLimit;
             }
         }
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            if(selfCamera.fieldOfView - ZoomStep * Input.mouseScrollDelta.y > MaximalZoom)
+            {
+                selfCamera.fieldOfView = MaximalZoom;
+            }
+            if(selfCamera.fieldOfView - ZoomStep * Input.mouseScrollDelta.y < MinimalZoom)
+            {
+                selfCamera.fieldOfView = MinimalZoom;
+            }
+            if(selfCamera.fieldOfView - ZoomStep * Input.mouseScrollDelta.y <= MaximalZoom && selfCamera.fieldOfView - ZoomStep * Input.mouseScrollDelta.y >= MinimalZoom)
+            {
+                selfCamera.fieldOfView = selfCamera.fieldOfView - ZoomStep * Input.mouseScrollDelta.y;
+            }
+        }
 
         mouse = Input.mousePosition;
-        Self.transform.root.SetPositionAndRotation(movement + Self.transform.root.position, Quaternion.Euler(rotationX, rotationY, Self.transform.root.rotation.eulerAngles.z));
+        transform.SetPositionAndRotation(movement + transform.position, Quaternion.Euler(rotationX, rotationY, transform.rotation.eulerAngles.z));
     }
 }

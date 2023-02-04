@@ -13,9 +13,10 @@ public class CharacterOperator : MonoBehaviour
     public float height;
     [HideInInspector]
     public GameObject field;
+    [HideInInspector]
+    public GameObject destinationField;
 
     Vector3 destination;
-    GameObject destinationField;
 
     public void move()
     {
@@ -31,7 +32,6 @@ public class CharacterOperator : MonoBehaviour
                 field = destinationField;
                 fieldComponent.character = null;
                 fieldComponent = field.GetComponent<FieldOperator>();
-                fieldComponent.character = gameObject;
             }
             else
             {
@@ -47,12 +47,14 @@ public class CharacterOperator : MonoBehaviour
         BoardOperator boardComponent = field1Component.board.GetComponent<BoardOperator>();
         FieldOperator field2Component = boardComponent.getField(field1Component.positionX + X, field1Component.positionY + Y).GetComponent<FieldOperator>();
         destinationField = boardComponent.getField(field1Component.positionX + X, field1Component.positionY + Y);
+        field2Component.character = gameObject;
 
         destination = new Vector3(X * boardComponent.FieldSize, field1Component.FieldHeight - field2Component.FieldHeight, Y * boardComponent.FieldSize);
     }
     public void setField(GameObject input)
     {
         field = input;
+        destinationField = field;
     }
     void Start()
     {

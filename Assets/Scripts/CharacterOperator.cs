@@ -90,6 +90,11 @@ public class CharacterOperator : MonoBehaviour
         fieldComponent.character = gameObject;
         destinationField.Add(input);
     }
+    private void Awake()
+    {
+        BoardOperator boardController = FindObjectOfType<BoardOperator>();
+        boardController.setCharacter(gameObject);
+    }
     void Start()
     {
 

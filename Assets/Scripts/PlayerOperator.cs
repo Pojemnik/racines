@@ -20,10 +20,14 @@ public class PlayerOperator : MonoBehaviour
     public List<GameObject> Arrows;
 
     bool isSelected = false;
-    CharacterOperator characterComponent;
-    FieldOperator fieldComponent;
-    BoardOperator boardComponent;
-    AudioSource audioComponent;
+    [HideInInspector]
+    public CharacterOperator characterComponent;
+    [HideInInspector]
+    public FieldOperator fieldComponent;
+    [HideInInspector]
+    public BoardOperator boardComponent;
+    [HideInInspector]
+    public AudioSource audioComponent;
 
     public void sayWhat()
     {
@@ -102,12 +106,14 @@ public class PlayerOperator : MonoBehaviour
             }
         }
     }
+    private void Awake()
+    {
+        boardComponent = FindObjectOfType<BoardOperator>();
+    }
     void Start()
     {
         audioComponent = GetComponent<AudioSource>();
         characterComponent = GetComponent<CharacterOperator>();
-        fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
-        boardComponent = fieldComponent.board.GetComponent<BoardOperator>();
         isSelected = false;
     }
     void Update()

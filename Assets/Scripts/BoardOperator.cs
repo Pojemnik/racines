@@ -7,7 +7,7 @@ public class BoardOperator : MonoBehaviour
     [Header("Setup")]
     [HideInInspector]
     public List<SerializationArrayWrapper<GameObject>> fields = new List<SerializationArrayWrapper<GameObject>>();
-    [SerializeField]
+    [HideInInspector]
     public List<GameObject> characters = new List<GameObject>();
     [SerializeField]
     public float FieldSize;
@@ -104,6 +104,12 @@ public class BoardOperator : MonoBehaviour
             fields[fieldControler.positionX].Add(new GameObject());
         }
         fields[fieldControler.positionX][fieldControler.positionY] = input;
+    }
+    public void setCharacter(GameObject input)
+    {
+        CharacterOperator characterControler = input.GetComponent<CharacterOperator>();
+
+        characters.Add(input);
     }
     public GameObject getField(int X, int Y)
     {
@@ -211,13 +217,27 @@ public class BoardOperator : MonoBehaviour
         characterComponent = characters[type].GetComponent<CharacterOperator>();
         characterComponent.setField(fields[X][Y]);
     }
+    public void setupCharacter(GameObject input)
+    {
+        CharacterOperator characterComponent = input.GetComponent<CharacterOperator>();
+        FieldOperator fieldComponent = fields[(int)Mathf.Round(input.transform.position.x)][(int)Mathf.Round(input.transform.position.z)].GetComponent<FieldOperator>();
+        PlayerOperator playerComponent = characterComponent.GetComponent<PlayerOperator>();
+        characterComponent.setField(fieldComponent.gameObject);
+        if(playerComponent != null)
+        {
+            playerComponent.fieldComponent = fieldComponent;
+        }
+    }
     void Start()
     {
         CharacterOperator characterComponent;
 
         //createBoard();
-        addCharacter(0, 1, 1);
-        characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
+        //addCharacter(0, 1, 1);
+        for(int i = 0; i < characters.Count; i++)
+        {
+            setupCharacter(characters[i]);
+        }
     }
     void Update()
     {

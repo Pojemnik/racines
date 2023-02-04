@@ -24,11 +24,13 @@ public class EnemyOperator : MonoBehaviour
         }
         characterComponent.moved = true;
     }
+    private void Awake()
+    {
+        boardComponent = FindObjectOfType<BoardOperator>();
+    }
     void Start()
     {
         characterComponent = GetComponent<CharacterOperator>();
-        fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
-        boardComponent = fieldComponent.board.GetComponent<BoardOperator>();
     }
     void Update()
     {

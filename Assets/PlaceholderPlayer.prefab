@@ -286,3 +286,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: da2572e1b7cf0b94ab65bd7db38a8e51, type: 3}
   - {fileID: 8300000, guid: 50e6a8a25868d19478eab8d9a4c0147e, type: 3}
   - {fileID: 8300000, guid: 54ee65030f5709744b75f32f234ea6c5, type: 3}
+  VoicelinesYes:
+  - {fileID: 8300000, guid: 95dabf0f100af3149adf28260ce5b0ea, type: 3}
+  - {fileID: 8300000, guid: feee5d2f41bc11949897d00e2f0d8861, type: 3}
+  ArrowPrefab: {fileID: 4516251856742225929, guid: d4a6a3947023e66468d85d93e71f1198, type: 3}
+  Movements: []

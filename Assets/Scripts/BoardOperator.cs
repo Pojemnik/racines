@@ -17,10 +17,77 @@ public class BoardOperator : MonoBehaviour
     GameObject FieldPrefab;
     [SerializeField]
     public float FieldSize;
+    [HideInInspector]
+    public GameObject selectedCharacter = null;
 
+    public void characterSelected(GameObject character)
+    {
+        PlayerOperator playerControler;
+        if (selectedCharacter!=null)
+        {
+            playerControler = selectedCharacter.GetComponent<PlayerOperator>();
+            playerControler.deselect();
+        }
+        selectedCharacter = character;
+        playerControler = selectedCharacter.GetComponent<PlayerOperator>();
+    }
     public GameObject getField(int X, int Y)
     {
         return (fields[X][Y]);
+    }
+    public List<GameObject> checkAndMove(GameObject start, int length, List<GameObject> used)
+    {
+        FieldOperator fieldController = start.GetComponent<FieldOperator>();
+        bool possible = true;
+        for (int i = 0; i < used.Count; i++)
+        {
+            if (used[i] == start)
+            {
+                possible = false;
+                break;
+            }
+        }
+        if (possible)
+        {
+            fieldController = start.GetComponent<FieldOperator>();
+            if (fieldController.canMove())
+            {
+                used.Add(start);
+                used = getPossibleMovements(start, length - 1, used);
+            }
+        }
+        return (used);
+    }
+    public List<GameObject> getPossibleMovements(GameObject start, int length, List<GameObject> used)
+    {
+        if(length != 0)
+        {
+            FieldOperator fieldController = start.GetComponent<FieldOperator>();
+            GameObject newField = null;
+            int X = fieldController.positionX;
+            int Y = fieldController.positionY;
+            if (X - 1 >= 0)
+            {
+                newField = fields[X - 1][Y];
+                used = checkAndMove(newField, length, used);
+            }
+            if (Y - 1 >= 0)
+            {
+                newField = fields[X][Y - 1];
+                used = checkAndMove(newField, length, used);
+            }
+            if (X + 1 < BoardSizeX)
+            {
+                newField = fields[X + 1][Y];
+                used = checkAndMove(newField, length, used);
+            }
+            if (Y + 1 < BoardSizeY)
+            {
+                newField = fields[X][Y + 1];
+                used = checkAndMove(newField, length, used);
+            }
+        }
+        return (used);
     }
     void createBoard()
     {

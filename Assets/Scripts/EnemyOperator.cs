@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class EnemyOperator : MonoBehaviour
 {
+    [Header("Gameplay Data")]
+    [SerializeField]
+    public List<List<GameObject>> SpottRange;
     [HideInInspector]
     public List<List<GameObject>> Movements;
 

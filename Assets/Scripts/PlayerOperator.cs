@@ -58,6 +58,7 @@ public class PlayerOperator : MonoBehaviour
     }
     public void makeDecision(GameObject decision)
     {
+        print("born to be king");
         ArrowOperator arrowComponent = decision.GetComponent<ArrowOperator>();
         FieldOperator arrowFieldComponent = arrowComponent.field.GetComponent<FieldOperator>();
         fieldComponent = characterComponent.field.GetComponent<FieldOperator>();

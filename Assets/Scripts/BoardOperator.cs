@@ -53,6 +53,7 @@ public class BoardOperator : MonoBehaviour
     public void nextTurn()
     {
         CharacterOperator characterController;
+        bool anyCharacter = false;
 
         turn++;
         if(turn>=Turns)
@@ -63,6 +64,19 @@ public class BoardOperator : MonoBehaviour
                 characterController.moved = false;
             }
             turn = 0;
+        }
+        for(int i = 0; i < characters.Count; i++)
+        {
+            characterController = characters[i].GetComponent<CharacterOperator>();
+            if (characterController.type == turn)
+            {
+                anyCharacter = true;
+                break;
+            }
+        }
+        if(!anyCharacter)
+        {
+            nextTurn();
         }
         enemyTurnMovements();
     }
@@ -92,17 +106,25 @@ public class BoardOperator : MonoBehaviour
         }
         return (false);
     }
-    public List<List<GameObject>> checkAndMove(GameObject start, List<GameObject> path, int length, List<List<GameObject>> used)
+    public List<List<GameObject>> checkAndMove(GameObject start, List<GameObject> path, int length, int total, List<List<GameObject>> used)
     {
         FieldOperator fieldController = start.GetComponent<FieldOperator>();
         bool possible = true;
+        List<int> others = new List<int>();
         List<GameObject> newPath = new List<GameObject>(path);
         for (int i = 0; i < used.Count; i++)
         {
             if (used[i][used[i].Count - 1] == start)
             {
-                possible = false;
-                break;
+                if(used[i].Count <= total - length)
+                {
+                    possible = false;
+                    break;
+                }
+                else
+                {
+                    others.Add(i);
+                }
             }
         }
         if (possible)
@@ -110,14 +132,18 @@ public class BoardOperator : MonoBehaviour
             fieldController = start.GetComponent<FieldOperator>();
             if (fieldController.canMove())
             {
+                for(int i=0;i<others.Count;i++)
+                {
+                    used.RemoveAt(others[i]);
+                }
                 newPath.Add(start);
                 used.Add(newPath);
-                used = getPossibleMovements(start, newPath, length - 1, used);
+                used = getPossibleMovements(start, newPath, length - 1, total, used);
             }
         }
         return (used);
     }
-    public List<List<GameObject>> getPossibleMovements(GameObject start, List<GameObject> path, int length, List<List<GameObject>> used)
+    public List<List<GameObject>> getPossibleMovements(GameObject start, List<GameObject> path, int length, int total, List<List<GameObject>> used)
     {
         if(length != 0)
         {
@@ -128,22 +154,22 @@ public class BoardOperator : MonoBehaviour
             if (fieldExist(X - 1, Y))
             {
                 newField = fields[X - 1][Y];
-                used = checkAndMove(newField, path, length, used);
+                used = checkAndMove(newField, path, length, total, used);
             }
             if (fieldExist(X, Y - 1))
             {
                 newField = fields[X][Y - 1];
-                used = checkAndMove(newField, path, length, used);
+                used = checkAndMove(newField, path, length, total, used);
             }
             if (fieldExist(X + 1, Y))
             {
                 newField = fields[X + 1][Y];
-                used = checkAndMove(newField, path, length, used);
+                used = checkAndMove(newField, path, length, total, used);
             }
             if (fieldExist(X, Y + 1))
             {
                 newField = fields[X][Y + 1];
-                used = checkAndMove(newField, path, length, used);
+                used = checkAndMove(newField, path, length, total, used);
             }
         }
         return (used);
@@ -177,8 +203,8 @@ public class BoardOperator : MonoBehaviour
 
         createBoard();
         addCharacter(0, 1, 1);
-        addCharacter(1, 0, 1);
-        addCharacter(2, 0, 0);
+        //addCharacter(1, 0, 1);
+        //addCharacter(2, 0, 0);
         characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
     }
     void Update()

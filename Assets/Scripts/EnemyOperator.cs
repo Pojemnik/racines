@@ -16,8 +16,7 @@ public class EnemyOperator : MonoBehaviour
     public void aiMakeDecision()
     {
         Movements = new List<List<GameObject>>();
-        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, new List<List<GameObject>>());
-        print(Movements.Count);
+        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, characterComponent.moveRange, new List<List<GameObject>>());
         fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
         if(Movements.Count != 0)
         {

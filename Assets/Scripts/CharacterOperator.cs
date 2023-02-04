@@ -14,14 +14,18 @@ public class CharacterOperator : MonoBehaviour
     [HideInInspector]
     public GameObject field;
     [HideInInspector]
-    public GameObject destinationField;
+    public List<GameObject> destinationField;
+    [HideInInspector]
+    public int pathStep;
 
     Vector3 destination;
 
     public void move()
     {
-        FieldOperator fieldComponent = field.GetComponent<FieldOperator>();
-        BoardOperator boardComponent = fieldComponent.board.GetComponent<BoardOperator>();
+        FieldOperator field1Component = field.GetComponent<FieldOperator>();
+        BoardOperator boardComponent = field1Component.board.GetComponent<BoardOperator>();
+        FieldOperator field2Component;
+        bool change = false;
         Vector3 movement = new Vector3();
 
         if(destination.magnitude > 0)
@@ -29,32 +33,49 @@ public class CharacterOperator : MonoBehaviour
             if (Time.deltaTime * moveSpeed >= destination.magnitude)
             {
                 movement = destination.normalized * destination.magnitude;
-                field = destinationField;
-                fieldComponent.character = null;
-                fieldComponent = field.GetComponent<FieldOperator>();
+                field = destinationField[pathStep];
+                pathStep++;
+                if(pathStep < destinationField.Count)
+                {
+                    change = true;
+                }
             }
             else
             {
                 movement = destination.normalized * Time.deltaTime * moveSpeed;
             }
             transform.SetPositionAndRotation(transform.position + movement, new Quaternion());
-            destination -= movement;
+            transform.forward = destination;
+            if(change)
+            {
+                field1Component = destinationField[pathStep-1].GetComponent<FieldOperator>();
+                field2Component = destinationField[pathStep].GetComponent<FieldOperator>();
+                destination = new Vector3((field2Component.positionX - field1Component.positionX) * boardComponent.FieldSize, field2Component.FieldHeight - field1Component.FieldHeight, (field2Component.positionY - field1Component.positionY) * boardComponent.FieldSize);
+            }
+            else
+            {
+                destination -= movement;
+            }
         }
     }
-    public void declareMovement(int X, int Y)
+    public void declareMovement(List<GameObject> path)
     {
         FieldOperator field1Component = field.GetComponent<FieldOperator>();
         BoardOperator boardComponent = field1Component.board.GetComponent<BoardOperator>();
-        FieldOperator field2Component = boardComponent.getField(field1Component.positionX + X, field1Component.positionY + Y).GetComponent<FieldOperator>();
-        destinationField = boardComponent.getField(field1Component.positionX + X, field1Component.positionY + Y);
+        FieldOperator field2Component = path[path.Count - 1].GetComponent<FieldOperator>();
+        destinationField = path;
+        field1Component.character = null;
         field2Component.character = gameObject;
+        field2Component = path[0].GetComponent<FieldOperator>();
+        pathStep = 0;
 
-        destination = new Vector3(X * boardComponent.FieldSize, field1Component.FieldHeight - field2Component.FieldHeight, Y * boardComponent.FieldSize);
+        destination = new Vector3((field2Component.positionX - field1Component.positionX) * boardComponent.FieldSize, field2Component.FieldHeight - field1Component.FieldHeight, (field2Component.positionY - field1Component.positionY) * boardComponent.FieldSize);
     }
     public void setField(GameObject input)
     {
         field = input;
-        destinationField = field;
+        destinationField = new List<GameObject>();
+        destinationField.Add(field);
     }
     void Start()
     {

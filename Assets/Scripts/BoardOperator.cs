@@ -29,13 +29,25 @@ public class BoardOperator : MonoBehaviour
     {
         return (fields[X][Y]);
     }
-    public List<GameObject> checkAndMove(GameObject start, int length, List<GameObject> used)
+    public bool fieldExist(int X, int Y)
+    {
+        if (X >= 0 && X < fields.Count)
+        {
+            if (Y >= 0 && Y < fields[X].Count)
+            {
+                return (true);
+            }
+        }
+        return (false);
+    }
+    public List<List<GameObject>> checkAndMove(GameObject start, List<GameObject> path, int length, List<List<GameObject>> used)
     {
         FieldOperator fieldController = start.GetComponent<FieldOperator>();
         bool possible = true;
+        List<GameObject> newPath = new List<GameObject>(path);
         for (int i = 0; i < used.Count; i++)
         {
-            if (used[i] == start)
+            if (used[i][used[i].Count - 1] == start)
             {
                 possible = false;
                 break;
@@ -46,24 +58,14 @@ public class BoardOperator : MonoBehaviour
             fieldController = start.GetComponent<FieldOperator>();
             if (fieldController.canMove())
             {
-                used.Add(start);
-                used = getPossibleMovements(start, length - 1, used);
+                newPath.Add(start);
+                used.Add(newPath);
+                used = getPossibleMovements(start, newPath, length - 1, used);
             }
         }
         return (used);
     }
-    public bool fieldExist(int X, int Y)
-    {
-        if(X >= 0 && X < fields.Count)
-        {
-            if (Y >= 0 && Y < fields[X].Count)
-            {
-                return (true);
-            }
-        }
-        return (false);
-    }
-    public List<GameObject> getPossibleMovements(GameObject start, int length, List<GameObject> used)
+    public List<List<GameObject>> getPossibleMovements(GameObject start, List<GameObject> path, int length, List<List<GameObject>> used)
     {
         if(length != 0)
         {
@@ -74,22 +76,22 @@ public class BoardOperator : MonoBehaviour
             if (fieldExist(X - 1, Y))
             {
                 newField = fields[X - 1][Y];
-                used = checkAndMove(newField, length, used);
+                used = checkAndMove(newField, path, length, used);
             }
             if (fieldExist(X, Y - 1))
             {
                 newField = fields[X][Y - 1];
-                used = checkAndMove(newField, length, used);
+                used = checkAndMove(newField, path, length, used);
             }
             if (fieldExist(X + 1, Y))
             {
                 newField = fields[X + 1][Y];
-                used = checkAndMove(newField, length, used);
+                used = checkAndMove(newField, path, length, used);
             }
             if (fieldExist(X, Y + 1))
             {
                 newField = fields[X][Y + 1];
-                used = checkAndMove(newField, length, used);
+                used = checkAndMove(newField, path, length, used);
             }
         }
         return (used);
@@ -122,7 +124,7 @@ public class BoardOperator : MonoBehaviour
         CharacterOperator characterComponent;
 
         createBoard();
-        addCharacter(0, 0, 0);
+        addCharacter(0, 1, 1);
         characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
     }
     void Update()

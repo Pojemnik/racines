@@ -10,12 +10,6 @@ public class BoardOperator : MonoBehaviour
     [SerializeField]
     public List<GameObject> characters = new List<GameObject>();
     [SerializeField]
-    public int BoardSizeX = 2;
-    [SerializeField]
-    public int BoardSizeY = 2;
-    [SerializeField]
-    public GameObject FieldPrefab;
-    [SerializeField]
     public float FieldSize;
     [HideInInspector]
     public GameObject selectedCharacter = null;
@@ -58,6 +52,17 @@ public class BoardOperator : MonoBehaviour
         }
         return (used);
     }
+    public bool fieldExist(int X, int Y)
+    {
+        if(X >= 0 && X < fields.Count)
+        {
+            if (Y >= 0 && Y < fields[X].Count)
+            {
+                return (true);
+            }
+        }
+        return (false);
+    }
     public List<GameObject> getPossibleMovements(GameObject start, int length, List<GameObject> used)
     {
         if(length != 0)
@@ -66,22 +71,22 @@ public class BoardOperator : MonoBehaviour
             GameObject newField = null;
             int X = fieldController.positionX;
             int Y = fieldController.positionY;
-            if (X - 1 >= 0)
+            if (fieldExist(X - 1, Y))
             {
                 newField = fields[X - 1][Y];
                 used = checkAndMove(newField, length, used);
             }
-            if (Y - 1 >= 0)
+            if (fieldExist(X, Y - 1))
             {
                 newField = fields[X][Y - 1];
                 used = checkAndMove(newField, length, used);
             }
-            if (X + 1 < BoardSizeX)
+            if (fieldExist(X + 1, Y))
             {
                 newField = fields[X + 1][Y];
                 used = checkAndMove(newField, length, used);
             }
-            if (Y + 1 < BoardSizeY)
+            if (fieldExist(X, Y + 1))
             {
                 newField = fields[X][Y + 1];
                 used = checkAndMove(newField, length, used);
@@ -91,19 +96,14 @@ public class BoardOperator : MonoBehaviour
     }
     void createBoard()
     {
-        //fields = new List<SerializationArrayWrapper<GameObject>>();
         FieldOperator fieldComponent;
 
-        for(int i=0; i<BoardSizeX; i++)
+        for(int i=0; i<fields.Count; i++)
         {
-            //fields.Add(new SerializationArrayWrapper<GameObject>());
-            for (int j=0; j<BoardSizeY; j++)
+            for (int j=0; j<fields[i].Count; j++)
             {
-                //fields[i].Add(FieldPrefab);
-                //fields[i][j] = Instantiate(fields[i][j]);
                 fieldComponent = fields[i][j].GetComponent<FieldOperator>();
                 fieldComponent.setBoard(gameObject, i, j);
-                //fields[i][j].transform.SetPositionAndRotation(new Vector3(FieldSize * i, 0, FieldSize * j), new Quaternion());
             }
         }
     }

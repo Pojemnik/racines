@@ -11,9 +11,61 @@ public class BoardOperator : MonoBehaviour
     public List<GameObject> characters = new List<GameObject>();
     [SerializeField]
     public float FieldSize;
+    [SerializeField]
+    public int Turns;
     [HideInInspector]
     public GameObject selectedCharacter = null;
 
+    int turn = 0;
+
+    public void enemyTurnMovements()
+    {
+        CharacterOperator characterController;
+        EnemyOperator enemyController;
+
+        for (int i = 0; i < characters.Count; i++)
+        {
+            characterController = characters[i].GetComponent<CharacterOperator>();
+            if(turn == characterController.type)
+            {
+                enemyController = characters[i].GetComponent<EnemyOperator>();
+                if (enemyController != null)
+                {
+                    enemyController.aiMakeDecision();
+                }
+            }
+        }
+    }
+    public bool checkTurnEnd()
+    {
+        CharacterOperator characterController;
+
+        for(int i=0;i<characters.Count;i++)
+        {
+            characterController = characters[i].GetComponent<CharacterOperator>();
+            if(characterController.type==turn && !characterController.moved)
+            {
+                return (false);
+            }
+        }
+        return (true);
+    }
+    public void nextTurn()
+    {
+        CharacterOperator characterController;
+
+        turn++;
+        if(turn>=Turns)
+        {
+            for(int i = 0; i < characters.Count; i++)
+            {
+                characterController = characters[i].GetComponent<CharacterOperator>();
+                characterController.moved = false;
+            }
+            turn = 0;
+        }
+        enemyTurnMovements();
+    }
     public void characterSelected(GameObject character)
     {
         PlayerOperator playerControler;
@@ -125,6 +177,8 @@ public class BoardOperator : MonoBehaviour
 
         createBoard();
         addCharacter(0, 1, 1);
+        addCharacter(1, 0, 1);
+        addCharacter(2, 0, 0);
         characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
     }
     void Update()

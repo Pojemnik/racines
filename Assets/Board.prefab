@@ -59,8 +59,6 @@ MonoBehaviour:
     - {fileID: 0}
   characters:
   - {fileID: 7343254583267808229, guid: 1b0a711950b6c6b468c5e580ac5a4bf6, type: 3}
-  BoardSizeX: 3
-  BoardSizeY: 3
-  FieldPrefab: {fileID: 4516251856742225929, guid: 4ad262a0610341f4aaff22acb357356b, type: 3}
   FieldSize: 1
+  Turns: 2
   selectedCharacter: {fileID: 0}

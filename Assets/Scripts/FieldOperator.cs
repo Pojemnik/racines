@@ -31,6 +31,7 @@ public class FieldOperator : MonoBehaviour
         board = input;
         positionX = x;
         positionY = y;
+        character = null;
     }
     void Start()
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 public class BoardOperator : MonoBehaviour
 {
     [Header("Setup")]
-    [HideInInspector]
-    public GameObject[][] fields;
+    [SerializeField]
+    public List<SerializationArrayWrapper<GameObject>> fields;
     [SerializeField]
     public List<GameObject> characters = new List<GameObject>();
     [SerializeField]
@@ -91,19 +91,19 @@ public class BoardOperator : MonoBehaviour
     }
     void createBoard()
     {
-        fields = new GameObject[BoardSizeX][];
+        //fields = new List<SerializationArrayWrapper<GameObject>>();
         FieldOperator fieldComponent;
 
         for(int i=0; i<BoardSizeX; i++)
         {
-            fields[i] = new GameObject[BoardSizeY];
+            //fields.Add(new SerializationArrayWrapper<GameObject>());
             for (int j=0; j<BoardSizeY; j++)
             {
-                fields[i][j] = FieldPrefab;
-                fields[i][j] = Instantiate(fields[i][j]);
+                //fields[i].Add(FieldPrefab);
+                //fields[i][j] = Instantiate(fields[i][j]);
                 fieldComponent = fields[i][j].GetComponent<FieldOperator>();
                 fieldComponent.setBoard(gameObject, i, j);
-                fields[i][j].transform.SetPositionAndRotation(new Vector3(FieldSize * i, 0, FieldSize * j), new Quaternion());
+                //fields[i][j].transform.SetPositionAndRotation(new Vector3(FieldSize * i, 0, FieldSize * j), new Quaternion());
             }
         }
     }

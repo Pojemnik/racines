@@ -23,9 +23,20 @@ public class PlayerOperator : MonoBehaviour
     BoardOperator boardComponent;
     AudioSource audioComponent;
 
+    public void sayWhat()
+    {
+        audioComponent.clip = VoicelinesWhat[Random.Range(0, VoicelinesWhat.Count)];
+        audioComponent.Play();
+    }
+    public void sayYes()
+    {
+        audioComponent.clip = VoicelinesYes[Random.Range(0, VoicelinesYes.Count)];
+        audioComponent.Play();
+    }
     public void deselect()
     {
         isSelected = false;
+        boardComponent.selectedCharacter = null;
     }
     public GameObject createArrow(GameObject field)
     {
@@ -33,7 +44,28 @@ public class PlayerOperator : MonoBehaviour
         GameObject newArrow;
         newArrow = Instantiate(ArrowPrefab);
         newArrow.transform.SetPositionAndRotation(field.transform.position + new Vector3(0, arrowFieldComponent.FieldHeight, 0), new Quaternion());
+        ArrowOperator arrowComponent = newArrow.GetComponent<ArrowOperator>();
+        arrowComponent.player = gameObject;
+        arrowComponent.field = field;
         return (newArrow);
+    }
+    public void deleteArrows()
+    {
+        for(int i=0;i<Movements.Count;i++)
+        {
+            Destroy(Movements[i]);
+        }
+    }
+    public void makeDecision(GameObject decision)
+    {
+        ArrowOperator arrowComponent = decision.GetComponent<ArrowOperator>();
+        FieldOperator arrowFieldComponent = arrowComponent.field.GetComponent<FieldOperator>();
+        fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
+
+        sayYes();
+        characterComponent.declareMovement(arrowFieldComponent.positionX - fieldComponent.positionX, arrowFieldComponent.positionY - fieldComponent.positionY);
+        deleteArrows();
+        deselect();
     }
     public void createPossibilities()
     {
@@ -46,9 +78,8 @@ public class PlayerOperator : MonoBehaviour
     private void OnMouseDown()
     {
         isSelected = true;
+        sayWhat();
         boardComponent.characterSelected(gameObject);
-        audioComponent.clip = VoicelinesWhat[Random.Range(0, VoicelinesWhat.Count)];
-        audioComponent.Play();
         createPossibilities();
     }
     void Start()

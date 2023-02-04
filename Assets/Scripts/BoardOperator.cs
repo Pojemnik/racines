@@ -10,11 +10,11 @@ public class BoardOperator : MonoBehaviour
     [SerializeField]
     public List<GameObject> characters = new List<GameObject>();
     [SerializeField]
-    int BoardSizeX = 2;
+    public int BoardSizeX = 2;
     [SerializeField]
-    int BoardSizeY = 2;
+    public int BoardSizeY = 2;
     [SerializeField]
-    GameObject FieldPrefab;
+    public GameObject FieldPrefab;
     [SerializeField]
     public float FieldSize;
     [HideInInspector]
@@ -107,15 +107,14 @@ public class BoardOperator : MonoBehaviour
             }
         }
     }
-    public void addCharacter(GameObject type, int X, int Y)
+    public void addCharacter(int type, int X, int Y)
     {
         CharacterOperator characterComponent;
         FieldOperator fieldComponent = fields[X][Y].GetComponent<FieldOperator>();
 
-        characters.Add(type);
-        characters[characters.Count - 1] = Instantiate(characters[characters.Count - 1]);
-        characters[characters.Count - 1].transform.SetPositionAndRotation(new Vector3(FieldSize * X, fieldComponent.FieldHeight, FieldSize * Y), new Quaternion());
-        characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
+        characters[type] = Instantiate(characters[type]);
+        characters[type].transform.SetPositionAndRotation(new Vector3(FieldSize * X, fieldComponent.FieldHeight, FieldSize * Y), new Quaternion());
+        characterComponent = characters[type].GetComponent<CharacterOperator>();
         characterComponent.setField(fields[X][Y]);
     }
     void Start()
@@ -123,9 +122,8 @@ public class BoardOperator : MonoBehaviour
         CharacterOperator characterComponent;
 
         createBoard();
-        addCharacter(characters[0], 0, 0);
+        addCharacter(0, 0, 0);
         characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
-        characterComponent.declareMovement(1, 0);
     }
     void Update()
     {

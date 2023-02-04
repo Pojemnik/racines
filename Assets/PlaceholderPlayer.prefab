@@ -105,6 +105,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 298630415756651862, guid: e72d35d9a07025545bdab6556dee2041, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4516251856742225929, guid: e72d35d9a07025545bdab6556dee2041, type: 3}
       propertyPath: m_Name
       value: PlaceholderPlayer

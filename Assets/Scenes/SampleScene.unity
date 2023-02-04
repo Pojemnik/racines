@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e64309d3a07bbf428833c5caf63654f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 4516251856742225929, guid: e72d35d9a07025545bdab6556dee2041, type: 3}
   BoardSizeX: 10
   BoardSizeY: 10
   FieldPrefab: {fileID: 4516251856742225929, guid: 4ad262a0610341f4aaff22acb357356b, type: 3}

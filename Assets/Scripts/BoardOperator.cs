@@ -230,10 +230,6 @@ public class BoardOperator : MonoBehaviour
     }
     void Start()
     {
-        CharacterOperator characterComponent;
-
-        //createBoard();
-        //addCharacter(0, 1, 1);
         for(int i = 0; i < characters.Count; i++)
         {
             setupCharacter(characters[i]);

@@ -35,6 +35,7 @@ public class PlayerOperator : MonoBehaviour
     }
     public void deselect()
     {
+        deleteArrows();
         isSelected = false;
         boardComponent.selectedCharacter = null;
     }
@@ -64,7 +65,6 @@ public class PlayerOperator : MonoBehaviour
 
         sayYes();
         characterComponent.declareMovement(arrowFieldComponent.positionX - fieldComponent.positionX, arrowFieldComponent.positionY - fieldComponent.positionY);
-        deleteArrows();
         deselect();
     }
     public void createPossibilities()
@@ -77,10 +77,20 @@ public class PlayerOperator : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        isSelected = true;
-        sayWhat();
-        boardComponent.characterSelected(gameObject);
-        createPossibilities();
+        if(characterComponent.field == characterComponent.destinationField)
+        {
+            if (isSelected)
+            {
+                deselect();
+            }
+            else
+            {
+                isSelected = true;
+                sayWhat();
+                boardComponent.characterSelected(gameObject);
+                createPossibilities();
+            }
+        }
     }
     void Start()
     {

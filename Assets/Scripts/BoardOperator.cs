@@ -102,6 +102,7 @@ public class BoardOperator : MonoBehaviour
         for (int i = fields[fieldControler.positionX].Count; i <= fieldControler.positionY; i++)
         {
             fields[fieldControler.positionX].Add(new GameObject());
+            fields[fieldControler.positionX][i] = null;
         }
         fields[fieldControler.positionX][fieldControler.positionY] = input;
     }
@@ -121,7 +122,10 @@ public class BoardOperator : MonoBehaviour
         {
             if (Y >= 0 && Y < fields[X].Count)
             {
-                return (true);
+                if(fields[X][Y]!=null)
+                {
+                    return (true);
+                }
             }
         }
         return (false);
@@ -193,6 +197,11 @@ public class BoardOperator : MonoBehaviour
             }
         }
         return (used);
+    }
+    public List<GameObject> charactersInRange(GameObject start, int range)
+    {
+        List<GameObject> output = new List<GameObject>();
+        return (output);
     }
     void createBoard()
     {

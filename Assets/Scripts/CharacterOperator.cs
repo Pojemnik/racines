@@ -7,6 +7,8 @@ public class CharacterOperator : MonoBehaviour
     [Header("Gameplay Data")]
     [SerializeField]
     public float moveSpeed;
+    [SerializeField]
+    public float height;
 
     GameObject field;
     Vector3 destination;

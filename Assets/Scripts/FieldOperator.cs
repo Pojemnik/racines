@@ -33,6 +33,14 @@ public class FieldOperator : MonoBehaviour
         positionY = y;
         character = null;
     }
+    private void Awake()
+    {
+        BoardOperator boardController = FindObjectOfType<BoardOperator>();
+        board = boardController.gameObject;
+        positionX = (int)Mathf.Round(transform.position.x);
+        positionY = (int)Mathf.Round(transform.position.z);
+        boardController.setField(gameObject);
+    }
     void Start()
     {
         

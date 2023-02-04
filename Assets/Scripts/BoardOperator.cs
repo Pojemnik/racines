@@ -5,8 +5,8 @@ using UnityEngine;
 public class BoardOperator : MonoBehaviour
 {
     [Header("Setup")]
-    [SerializeField]
-    public List<SerializationArrayWrapper<GameObject>> fields;
+    [HideInInspector]
+    public List<SerializationArrayWrapper<GameObject>> fields = new List<SerializationArrayWrapper<GameObject>>();
     [SerializeField]
     public List<GameObject> characters = new List<GameObject>();
     [SerializeField]
@@ -90,6 +90,20 @@ public class BoardOperator : MonoBehaviour
         }
         selectedCharacter = character;
         playerControler = selectedCharacter.GetComponent<PlayerOperator>();
+    }
+    public void setField(GameObject input)
+    {
+        FieldOperator fieldControler = input.GetComponent<FieldOperator>();
+
+        for(int i = fields.Count; i <= fieldControler.positionX; i++)
+        {
+            fields.Add(new SerializationArrayWrapper<GameObject>());
+        }
+        for (int i = fields[fieldControler.positionX].Count; i <= fieldControler.positionY; i++)
+        {
+            fields[fieldControler.positionX].Add(new GameObject());
+        }
+        fields[fieldControler.positionX][fieldControler.positionY] = input;
     }
     public GameObject getField(int X, int Y)
     {
@@ -201,10 +215,8 @@ public class BoardOperator : MonoBehaviour
     {
         CharacterOperator characterComponent;
 
-        createBoard();
+        //createBoard();
         addCharacter(0, 1, 1);
-        //addCharacter(1, 0, 1);
-        //addCharacter(2, 0, 0);
         characterComponent = characters[characters.Count - 1].GetComponent<CharacterOperator>();
     }
     void Update()

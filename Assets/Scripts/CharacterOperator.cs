@@ -6,11 +6,14 @@ public class CharacterOperator : MonoBehaviour
 {
     [Header("Gameplay Data")]
     [SerializeField]
+    public int moveRange;
+    [SerializeField]
     public float moveSpeed;
     [SerializeField]
     public float height;
+    [HideInInspector]
+    public GameObject field;
 
-    GameObject field;
     Vector3 destination;
     GameObject destinationField;
 
@@ -26,6 +29,9 @@ public class CharacterOperator : MonoBehaviour
             {
                 movement = destination.normalized * destination.magnitude;
                 field = destinationField;
+                fieldComponent.character = null;
+                fieldComponent = field.GetComponent<FieldOperator>();
+                fieldComponent.character = gameObject;
             }
             else
             {

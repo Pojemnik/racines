@@ -106,9 +106,11 @@ MonoBehaviour:
   moveRange: 3
   moveSpeed: 3
   height: 2
+  type: 0
   field: {fileID: 0}
   destinationField: []
   pathStep: 0
+  moved: 0
 --- !u!82 &3651043635420641518
 AudioSource:
   m_ObjectHideFlags: 0
@@ -225,7 +227,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 95dabf0f100af3149adf28260ce5b0ea, type: 3}
   - {fileID: 8300000, guid: 54ee65030f5709744b75f32f234ea6c5, type: 3}
   - {fileID: 8300000, guid: 50e6a8a25868d19478eab8d9a4c0147e, type: 3}
-  ArrowPrefab: {fileID: 2803192678815154270, guid: 78aaadd172cac394c9c336137010bdb9, type: 3}
+  ArrowPrefab: {fileID: 1840156190515750534, guid: fc6e15abf6e2e0e48bccc9e4b6866ec4, type: 3}
   Arrows: []
 --- !u!65 &5513190204347054189
 BoxCollider:

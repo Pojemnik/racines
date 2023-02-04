@@ -201,7 +201,11 @@ MonoBehaviour:
   moveRange: 3
   moveSpeed: 5
   height: 2
+  type: 0
   field: {fileID: 0}
+  destinationField: []
+  pathStep: 0
+  moved: 0
 --- !u!114 &8140274927783891910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,8 +224,8 @@ MonoBehaviour:
   VoicelinesYes:
   - {fileID: 8300000, guid: ab3b705f3c7de294680d78a08899dfa0, type: 3}
   - {fileID: 8300000, guid: b6aa3dbcc80db5b47888eedebc3f89eb, type: 3}
-  ArrowPrefab: {fileID: 2803192678815154270, guid: 78aaadd172cac394c9c336137010bdb9, type: 3}
-  Movements: []
+  ArrowPrefab: {fileID: 1840156190515750534, guid: fc6e15abf6e2e0e48bccc9e4b6866ec4, type: 3}
+  Arrows: []
 --- !u!65 &1381978363281769096
 BoxCollider:
   m_ObjectHideFlags: 0

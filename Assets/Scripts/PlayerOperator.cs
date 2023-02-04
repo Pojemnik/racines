@@ -15,7 +15,9 @@ public class PlayerOperator : MonoBehaviour
     [SerializeField]
     public GameObject ArrowPrefab;
     [HideInInspector]
-    public List<GameObject> Movements;
+    public List<List<GameObject>> Movements;
+    [HideInInspector]
+    public List<GameObject> Arrows;
 
     bool isSelected = false;
     CharacterOperator characterComponent;
@@ -54,7 +56,7 @@ public class PlayerOperator : MonoBehaviour
     {
         for(int i=0;i<Movements.Count;i++)
         {
-            Destroy(Movements[i]);
+            Destroy(Arrows[i]);
         }
     }
     public void makeDecision(GameObject decision)
@@ -64,20 +66,27 @@ public class PlayerOperator : MonoBehaviour
         fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
 
         sayYes();
-        characterComponent.declareMovement(arrowFieldComponent.positionX - fieldComponent.positionX, arrowFieldComponent.positionY - fieldComponent.positionY);
+        for(int i=0;i<Movements.Count;i++)
+        {
+            if(Arrows[i] == decision)
+            {
+                characterComponent.declareMovement(Movements[i]);
+            }
+        }
         deselect();
     }
     public void createPossibilities()
     {
-        Movements = boardComponent.getPossibleMovements(characterComponent.field, characterComponent.moveRange, new List<GameObject>());
+        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, new List<List<GameObject>>());
+        Arrows = new List<GameObject>();
         for(int i = 0; i < Movements.Count; i++)
         {
-            Movements[i] = createArrow(Movements[i]);
+            Arrows.Add(createArrow(Movements[i][Movements[i].Count - 1]));
         }
     }
     private void OnMouseDown()
     {
-        if(characterComponent.field == characterComponent.destinationField)
+        if(characterComponent.field == characterComponent.destinationField[characterComponent.destinationField.Count - 1])
         {
             if (isSelected)
             {

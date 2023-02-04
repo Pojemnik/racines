@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886986035463981283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.926, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.5, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2936468573903223954}
@@ -93,7 +93,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 298630415756651862, guid: e72d35d9a07025545bdab6556dee2041, type: 3}
       propertyPath: moveSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4516251856742225929, guid: e72d35d9a07025545bdab6556dee2041, type: 3}
       propertyPath: m_Name
@@ -280,4 +280,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 95dabf0f100af3149adf28260ce5b0ea, type: 3}
   - {fileID: 8300000, guid: feee5d2f41bc11949897d00e2f0d8861, type: 3}
   ArrowPrefab: {fileID: 4516251856742225929, guid: d4a6a3947023e66468d85d93e71f1198, type: 3}
-  Movements: []
+  Arrows: []

@@ -74,6 +74,7 @@ public class PlayerOperator : MonoBehaviour
             }
         }
         deselect();
+        characterComponent.moved = true;
     }
     public void createPossibilities()
     {
@@ -86,7 +87,7 @@ public class PlayerOperator : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if(characterComponent.field == characterComponent.destinationField[characterComponent.destinationField.Count - 1])
+        if(characterComponent.field == characterComponent.destinationField[characterComponent.destinationField.Count - 1] && !characterComponent.moved)
         {
             if (isSelected)
             {
@@ -107,6 +108,7 @@ public class PlayerOperator : MonoBehaviour
         characterComponent = GetComponent<CharacterOperator>();
         fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
         boardComponent = fieldComponent.board.GetComponent<BoardOperator>();
+        isSelected = false;
     }
     void Update()
     {

@@ -11,12 +11,16 @@ public class CharacterOperator : MonoBehaviour
     public float moveSpeed;
     [SerializeField]
     public float height;
+    [SerializeField]
+    public int type = 0;
     [HideInInspector]
     public GameObject field;
     [HideInInspector]
     public List<GameObject> destinationField;
     [HideInInspector]
     public int pathStep;
+    [HideInInspector]
+    public bool moved = false;
 
     Vector3 destination;
 
@@ -57,6 +61,13 @@ public class CharacterOperator : MonoBehaviour
                 destination -= movement;
             }
         }
+        if(pathStep >= destinationField.Count)
+        {
+            if(boardComponent.checkTurnEnd())
+            {
+                boardComponent.nextTurn();
+            }
+        }
     }
     public void declareMovement(List<GameObject> path)
     {
@@ -73,9 +84,11 @@ public class CharacterOperator : MonoBehaviour
     }
     public void setField(GameObject input)
     {
+        FieldOperator fieldComponent = input.GetComponent<FieldOperator>();
         field = input;
         destinationField = new List<GameObject>();
-        destinationField.Add(field);
+        fieldComponent.character = gameObject;
+        destinationField.Add(input);
     }
     void Start()
     {

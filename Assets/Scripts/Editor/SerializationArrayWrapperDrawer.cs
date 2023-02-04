@@ -25,7 +25,7 @@ public class SerializationArrayWrapperDrawer : PropertyDrawer
         SerializedProperty arrayProperty = property.FindPropertyRelative("Array");
         if (!arrayLists.ContainsKey(property.propertyPath) || arrayLists[property.propertyPath].index > arrayLists[property.propertyPath].count - 1)
         {
-            arrayLists[property.propertyPath] = new ReorderableList(arrayProperty.serializedObject, arrayProperty, false, false, true, true);
+            arrayLists[property.propertyPath] = new ReorderableList(arrayProperty.serializedObject, arrayProperty, true, false, true, true);
 
             arrayLists[property.propertyPath].drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {

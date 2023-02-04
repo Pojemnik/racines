@@ -13,9 +13,10 @@ public class CharacterOperator : MonoBehaviour
     public float height;
     [HideInInspector]
     public GameObject field;
+    [HideInInspector]
+    public GameObject destinationField;
 
     Vector3 destination;
-    GameObject destinationField;
 
     public void move()
     {
@@ -53,6 +54,7 @@ public class CharacterOperator : MonoBehaviour
     public void setField(GameObject input)
     {
         field = input;
+        destinationField = field;
     }
     void Start()
     {

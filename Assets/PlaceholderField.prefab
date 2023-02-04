@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Walkable: 1
-  FieldHeight: 0
+  FieldHeight: 0.2
   board: {fileID: 0}
   positionX: 0
   positionY: 0

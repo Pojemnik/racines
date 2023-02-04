@@ -11,7 +11,6 @@ public class ArrowOperator : MonoBehaviour
 
     private void OnMouseDown()
     {
-        print("here i am");
         PlayerOperator playerControler = player.GetComponent<PlayerOperator>();
 
         playerControler.makeDecision(gameObject);

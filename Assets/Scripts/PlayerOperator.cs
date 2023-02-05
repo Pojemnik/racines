@@ -13,6 +13,10 @@ public class PlayerOperator : MonoBehaviour
     [SerializeField]
     public List<AudioClip> VoicelinesYes;
     [SerializeField]
+    public List<AudioClip> VoicelinesPick;
+    [SerializeField]
+    public List<AudioClip> VoicelinesDrop;
+    [SerializeField]
     public GameObject ArrowPrefab;
     [HideInInspector]
     public List<List<GameObject>> Movements;
@@ -21,7 +25,7 @@ public class PlayerOperator : MonoBehaviour
     [HideInInspector]
     public GameObject carriedSpice = null;
     [HideInInspector]
-    bool isSelected = false;
+    public bool isSelected = false;
     [HideInInspector]
     public CharacterOperator characterComponent;
     [HideInInspector]
@@ -31,6 +35,16 @@ public class PlayerOperator : MonoBehaviour
     [HideInInspector]
     public AudioSource audioComponent;
 
+    public void sayPick()
+    {
+        audioComponent.clip = VoicelinesPick[Random.Range(0, VoicelinesPick.Count)];
+        audioComponent.Play();
+    }
+    public void sayDrop()
+    {
+        audioComponent.clip = VoicelinesDrop[Random.Range(0, VoicelinesDrop.Count)];
+        audioComponent.Play();
+    }
     public void sayWhat()
     {
         audioComponent.clip = VoicelinesWhat[Random.Range(0, VoicelinesWhat.Count)];
@@ -107,6 +121,7 @@ public class PlayerOperator : MonoBehaviour
 
             spiceController.caryingCharacter = gameObject;
             carriedSpice = spice;
+            sayPick();
         }
     }
     private void OnMouseDown()

@@ -7,6 +7,8 @@ public class SpiceOperator : MonoBehaviour
     [Header("Gameplay Data")]
     [SerializeField]
     public float BackDistance;
+    [SerializeField]
+    public float BackHeight;
     [HideInInspector]
     public int positionX;
     [HideInInspector]
@@ -83,7 +85,7 @@ public class SpiceOperator : MonoBehaviour
         {
             characterController = caryingCharacter.GetComponent<CharacterOperator>();
             rotation = caryingCharacter.transform.rotation;
-            position = caryingCharacter.transform.position + (rotation * new Vector3(0,0,-BackDistance));
+            position = caryingCharacter.transform.position + (rotation * new Vector3(0,0,-BackDistance)) + new Vector3(0, BackHeight, 0);
             transform.SetPositionAndRotation(position, rotation);
         }
     }

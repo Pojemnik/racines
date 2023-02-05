@@ -27,6 +27,12 @@ public class EnemyOperator : MonoBehaviour
         }
         characterComponent.moved = true;
     }
+    public void spicePickup(GameObject spice)
+    {
+        SpiceOperator spiceController = spice.GetComponent<SpiceOperator>();
+
+        spiceController.caryingCharacter = gameObject;
+    }
     private void Awake()
     {
         boardComponent = FindObjectOfType<BoardOperator>();

@@ -29,6 +29,7 @@ public class CharacterOperator : MonoBehaviour
         FieldOperator field1Component = field.GetComponent<FieldOperator>();
         BoardOperator boardComponent = field1Component.board.GetComponent<BoardOperator>();
         FieldOperator field2Component;
+        GameObject spice;
         bool change = false;
         Vector3 movement = new Vector3();
 
@@ -63,6 +64,11 @@ public class CharacterOperator : MonoBehaviour
         }
         if(pathStep >= destinationField.Count)
         {
+            spice = boardComponent.checkSpice(field);
+            if (spice != null)
+            {
+                spicePickup(spice);
+            }
             if(boardComponent.checkTurnEnd())
             {
                 boardComponent.nextTurn();
@@ -89,6 +95,20 @@ public class CharacterOperator : MonoBehaviour
         destinationField = new List<GameObject>();
         fieldComponent.character = gameObject;
         destinationField.Add(input);
+    }
+    public void spicePickup(GameObject spice)
+    {
+        PlayerOperator playerController = gameObject.GetComponent<PlayerOperator>();
+        EnemyOperator enemyController = gameObject.GetComponent<EnemyOperator>();
+
+        if (playerController != null)
+        {
+            playerController.spicePickup(spice);
+        }
+        if (enemyController != null)
+        {
+            enemyController.spicePickup(spice);
+        }
     }
     private void Awake()
     {

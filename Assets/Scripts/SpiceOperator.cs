@@ -32,6 +32,7 @@ public class SpiceOperator : MonoBehaviour
                     i++;
                 }
             }
+            playerComponent.sayDrop();
             Destroy(gameObject);
         }
     }

@@ -233,6 +233,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7671e266ebb179740a521724ce476777, type: 3}
   - {fileID: 8300000, guid: 5837f573bcd789849b8d8629b01bee44, type: 3}
   - {fileID: 8300000, guid: 9e3566370b942ef4ca432b75d8e24a9c, type: 3}
+  VoicelinesDie:
+  - {fileID: 8300000, guid: a3667ac91232a1f4e86290fa5a1ea2f4, type: 3}
+  - {fileID: 8300000, guid: 63ff3e370230d3e46802ec481b6c0750, type: 3}
+  - {fileID: 8300000, guid: 265cb04204bd5054c934edb11fc4b9f8, type: 3}
+  - {fileID: 8300000, guid: a7844ff7d87f2a441b24ebbb02ffcac2, type: 3}
   ArrowPrefab: {fileID: 1840156190515750534, guid: fc6e15abf6e2e0e48bccc9e4b6866ec4, type: 3}
   Arrows: []
   carriedSpice: {fileID: 0}

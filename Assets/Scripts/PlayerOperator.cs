@@ -20,6 +20,8 @@ public class PlayerOperator : MonoBehaviour
     public List<AudioClip> VoicelinesDie;
     [SerializeField]
     public GameObject ArrowPrefab;
+    [SerializeField]
+    public bool Killable;
     [HideInInspector]
     public List<List<GameObject>> Movements;
     [HideInInspector]
@@ -65,7 +67,10 @@ public class PlayerOperator : MonoBehaviour
     public void kill()
     {
         sayDie();
-        characterComponent.kill();
+        if(Killable)
+        {
+            characterComponent.kill();
+        }
     }
     public void deselect()
     {
@@ -106,7 +111,6 @@ public class PlayerOperator : MonoBehaviour
             }
         }
         deselect();
-        characterComponent.moved = true;
     }
     public void createPossibilities()
     {

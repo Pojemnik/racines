@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveRange: 3
-  moveSpeed: 1
+  moveSpeed: 3
   height: 2
   type: 1
   field: {fileID: 0}

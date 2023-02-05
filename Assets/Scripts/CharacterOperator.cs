@@ -71,6 +71,7 @@ public class CharacterOperator : MonoBehaviour
             {
                 spicePickup(spice);
             }
+            moved = true;
             if(boardComponent.checkTurnEnd())
             {
                 boardComponent.nextTurn();
@@ -80,7 +81,7 @@ public class CharacterOperator : MonoBehaviour
             if (playerComponent != null && playerComponent.carriedSpice != null && field2Component.SpiceDrop)
             {
                 SpiceOperator spiceController = playerComponent.carriedSpice.GetComponent<SpiceOperator>();
-                spiceController.Score();
+                spiceController.score();
             }
         }
     }

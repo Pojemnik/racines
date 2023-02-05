@@ -151,7 +151,7 @@ public class BoardOperator : MonoBehaviour
         }
         return (false);
     }
-    public List<List<GameObject>> checkAndMove(GameObject start, List<GameObject> path, int length, int total, List<List<GameObject>> used)
+    public List<List<GameObject>> checkAndMove(GameObject start, List<GameObject> path, int length, int total, List<List<GameObject>> used, bool ignorePlayers)
     {
         FieldOperator fieldController = start.GetComponent<FieldOperator>();
         bool possible = true;
@@ -175,7 +175,7 @@ public class BoardOperator : MonoBehaviour
         if (possible)
         {
             fieldController = start.GetComponent<FieldOperator>();
-            if (fieldController.canMove())
+            if (fieldController.canMove(ignorePlayers))
             {
                 for(int i=0;i<others.Count;i++)
                 {
@@ -183,12 +183,12 @@ public class BoardOperator : MonoBehaviour
                 }
                 newPath.Add(start);
                 used.Add(newPath);
-                used = getPossibleMovements(start, newPath, length - 1, total, used);
+                used = getPossibleMovements(start, newPath, length - 1, total, used, ignorePlayers);
             }
         }
         return (used);
     }
-    public List<List<GameObject>> getPossibleMovements(GameObject start, List<GameObject> path, int length, int total, List<List<GameObject>> used)
+    public List<List<GameObject>> getPossibleMovements(GameObject start, List<GameObject> path, int length, int total, List<List<GameObject>> used, bool ignorePlayers)
     {
         if(length != 0)
         {
@@ -199,34 +199,25 @@ public class BoardOperator : MonoBehaviour
             if (fieldExist(X - 1, Y))
             {
                 newField = fields[X - 1][Y];
-                used = checkAndMove(newField, path, length, total, used);
+                used = checkAndMove(newField, path, length, total, used, ignorePlayers);
             }
             if (fieldExist(X, Y - 1))
             {
                 newField = fields[X][Y - 1];
-                used = checkAndMove(newField, path, length, total, used);
+                used = checkAndMove(newField, path, length, total, used, ignorePlayers);
             }
             if (fieldExist(X + 1, Y))
             {
                 newField = fields[X + 1][Y];
-                used = checkAndMove(newField, path, length, total, used);
+                used = checkAndMove(newField, path, length, total, used, ignorePlayers);
             }
             if (fieldExist(X, Y + 1))
             {
                 newField = fields[X][Y + 1];
-                used = checkAndMove(newField, path, length, total, used);
+                used = checkAndMove(newField, path, length, total, used, ignorePlayers);
             }
         }
         return (used);
-    }
-    public List<GameObject> charactersInRange(GameObject start, int range)
-    {
-        List<GameObject> output = new List<GameObject>();
-        List<List<GameObject>> directions = new List<List<GameObject>>();
-
-
-
-        return (output);
     }
     void createBoard()
     {

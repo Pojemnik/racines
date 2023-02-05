@@ -43,11 +43,13 @@ public class EnemyOperator : MonoBehaviour
         }
         if(detectedPlayer!=null)
         {
+            playerComponent = detectedPlayer.GetComponent<PlayerOperator>();
             if (Movements.Count != 0 && Movements[value].Count > 1)
             {
                 if (characterComponent.moveRange >= Movements[value].Count)
                 {
                     attackPath = Movements[value].GetRange(0, Movements[value].Count - 1);
+                    playerComponent.kill();
                 }
                 else
                 {
@@ -55,6 +57,7 @@ public class EnemyOperator : MonoBehaviour
                 }
                 characterComponent.declareMovement(attackPath);
             }
+            playerComponent.kill();
         }
         else
         {

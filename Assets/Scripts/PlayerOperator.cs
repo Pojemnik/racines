@@ -35,6 +35,10 @@ public class PlayerOperator : MonoBehaviour
     [HideInInspector]
     public AudioSource audioComponent;
 
+    public void kill()
+    {
+        characterComponent.kill();
+    }
     public void sayPick()
     {
         audioComponent.clip = VoicelinesPick[Random.Range(0, VoicelinesPick.Count)];

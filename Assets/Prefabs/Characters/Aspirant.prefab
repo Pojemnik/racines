@@ -229,4 +229,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4634aa8f8d89142af9b84c3fb5c117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpottRange: 7
+  SpottRange: 20

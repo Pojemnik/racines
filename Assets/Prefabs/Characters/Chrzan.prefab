@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackDistance: 0.4
+  BackHeight: 0.4
   positionX: 0
   positionY: 0
   caryingCharacter: {fileID: 0}

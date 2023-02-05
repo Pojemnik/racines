@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 171281125420627493}
   - component: {fileID: 3877415471399827840}
   - component: {fileID: 1309333192665402698}
+  - component: {fileID: -4676140421047989729}
   m_Layer: 0
   m_Name: Chrzan
   m_TagString: Untagged
@@ -83,3 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4676140421047989729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660714035764571295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fcbed2e94c42974397f4123bccaa9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackDistance: 0.4
+  positionX: 0
+  positionY: 0
+  caryingCharacter: {fileID: 0}
+  board: {fileID: 0}

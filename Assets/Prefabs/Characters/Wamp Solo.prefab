@@ -226,8 +226,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bfb0177b857be1e4e85d3c3dd69483d4, type: 3}
   - {fileID: 8300000, guid: e0c94c5990f31cd42bf057fa9c343a4b, type: 3}
   - {fileID: 8300000, guid: c7069ce3d58e5ce4c8d41600bb7e71aa, type: 3}
+  VoicelinesPick:
+  - {fileID: 8300000, guid: ace55576891fb4748ae8b5009b6ca692, type: 3}
+  - {fileID: 8300000, guid: b16c2dc027291a94c92846efb6dc37e1, type: 3}
+  VoicelinesDrop:
+  - {fileID: 8300000, guid: 7671e266ebb179740a521724ce476777, type: 3}
+  - {fileID: 8300000, guid: 5837f573bcd789849b8d8629b01bee44, type: 3}
+  - {fileID: 8300000, guid: 9e3566370b942ef4ca432b75d8e24a9c, type: 3}
   ArrowPrefab: {fileID: 1840156190515750534, guid: fc6e15abf6e2e0e48bccc9e4b6866ec4, type: 3}
   Arrows: []
+  carriedSpice: {fileID: 0}
+  isSelected: 0
+  characterComponent: {fileID: 0}
+  fieldComponent: {fileID: 0}
+  boardComponent: {fileID: 0}
+  audioComponent: {fileID: 0}
 --- !u!65 &3616973989822846251
 BoxCollider:
   m_ObjectHideFlags: 0

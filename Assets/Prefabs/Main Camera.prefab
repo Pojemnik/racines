@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeedX: 10
   SpeedY: 10
-  RotationSpeed: 20
+  RotationSpeed: 10
   TopRotationLimit: 88
   BottomRotationLimit: 20
   ZoomStep: 5

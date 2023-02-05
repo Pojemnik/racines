@@ -29,6 +29,7 @@ public class CharacterOperator : MonoBehaviour
         FieldOperator field1Component = field.GetComponent<FieldOperator>();
         BoardOperator boardComponent = field1Component.board.GetComponent<BoardOperator>();
         FieldOperator field2Component;
+        PlayerOperator playerComponent;
         GameObject spice;
         bool change = false;
         Vector3 movement = new Vector3();
@@ -72,6 +73,13 @@ public class CharacterOperator : MonoBehaviour
             if(boardComponent.checkTurnEnd())
             {
                 boardComponent.nextTurn();
+            }
+            playerComponent = gameObject.GetComponent<PlayerOperator>();
+            field2Component = field.GetComponent<FieldOperator>();
+            if (playerComponent != null && playerComponent.carriedSpice != null && field2Component.SpiceDrop)
+            {
+                SpiceOperator spiceController = playerComponent.carriedSpice.GetComponent<SpiceOperator>();
+                spiceController.Score();
             }
         }
     }

@@ -8,6 +8,8 @@ public class FieldOperator : MonoBehaviour
     [SerializeField]
     public bool Walkable = true;
     [SerializeField]
+    public bool SpiceDrop = false;
+    [SerializeField]
     public float FieldHeight = 0;
     [HideInInspector]
     public GameObject board;

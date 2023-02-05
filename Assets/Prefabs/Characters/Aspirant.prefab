@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveRange: 3
-  moveSpeed: 3
+  moveSpeed: 1
   height: 2
   type: 1
   field: {fileID: 0}
@@ -229,4 +229,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4634aa8f8d89142af9b84c3fb5c117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpottRange: 20
+  SpottRange: 10

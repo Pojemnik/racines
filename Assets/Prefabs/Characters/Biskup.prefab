@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d182cf9084b8742a72de38ba225358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveRange: 5
+  moveRange: 6
   moveSpeed: 5
   height: 2
   type: 1
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4634aa8f8d89142af9b84c3fb5c117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpottRange: 20
+  SpottRange: 10
 --- !u!65 &7711247782957823506
 BoxCollider:
   m_ObjectHideFlags: 0

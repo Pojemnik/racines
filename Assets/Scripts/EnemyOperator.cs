@@ -8,7 +8,7 @@ public class EnemyOperator : MonoBehaviour
 {
     [Header("Gameplay Data")]
     [SerializeField]
-    public List<List<GameObject>> SpottRange;
+    public int SpottRange;
     [HideInInspector]
     public List<List<GameObject>> Movements;
 
@@ -18,12 +18,50 @@ public class EnemyOperator : MonoBehaviour
 
     public void aiMakeDecision()
     {
+        GameObject detectedPlayer = null;
+        int value = -1;
+        GameObject checkField = null;
+        List<GameObject> attackPath = new List<GameObject>();
+        PlayerOperator playerComponent;
+        FieldOperator playerFieldComponent;
+
         Movements = new List<List<GameObject>>();
-        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, characterComponent.moveRange, new List<List<GameObject>>());
+        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), SpottRange, SpottRange, new List<List<GameObject>>(), true);
         fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
-        if(Movements.Count != 0)
+        for (int i = 0; i < Movements.Count; i++)
         {
-            characterComponent.declareMovement(Movements[Random.Range(0, Movements.Count)]);
+            playerFieldComponent = Movements[i][Movements[i].Count - 1].GetComponent<FieldOperator>();
+            if(playerFieldComponent.character != null)
+            {
+                playerComponent = playerFieldComponent.character.GetComponent<PlayerOperator>();
+                if (playerComponent != null && (value < 0 || Movements[value].Count > Movements[i].Count))
+                {
+                    detectedPlayer = playerComponent.gameObject;
+                    value = i;
+                }
+            }
+        }
+        if(detectedPlayer!=null)
+        {
+            if (Movements.Count != 0 && Movements[value].Count > 1)
+            {
+                if (characterComponent.moveRange >= Movements[value].Count)
+                {
+                    attackPath = Movements[value].GetRange(0, Movements[value].Count - 1);
+                }
+                else
+                {
+                    attackPath = Movements[value].GetRange(0, characterComponent.moveRange);
+                }
+                characterComponent.declareMovement(attackPath);
+            }
+        }
+        else
+        {
+            if (Movements.Count != 0)
+            {
+                characterComponent.declareMovement(Movements[Random.Range(0, Movements.Count)]);
+            }
         }
         characterComponent.moved = true;
     }

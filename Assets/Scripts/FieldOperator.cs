@@ -20,9 +20,14 @@ public class FieldOperator : MonoBehaviour
     [HideInInspector]
     public GameObject character = null;
 
-    public bool canMove()
+    public bool canMove(bool ignorePlayers)
     {
-        if (Walkable && character == null)
+        PlayerOperator playerController = null;
+        if (character != null && ignorePlayers)
+        {
+            playerController = character.GetComponent<PlayerOperator>();
+        }
+        if (Walkable && (character == null || playerController != null))
         {
             return (true);
         }

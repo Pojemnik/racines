@@ -84,7 +84,7 @@ public class PlayerOperator : MonoBehaviour
     }
     public void createPossibilities()
     {
-        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, characterComponent.moveRange, new List<List<GameObject>>());
+        Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, characterComponent.moveRange, new List<List<GameObject>>(), false);
         Arrows = new List<GameObject>();
         if(Movements.Count != 0)
         {

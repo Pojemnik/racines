@@ -15,9 +15,26 @@ public class BoardOperator : MonoBehaviour
     public int Turns;
     [HideInInspector]
     public GameObject selectedCharacter = null;
+    [HideInInspector]
+    public List<GameObject> rootSpice = new List<GameObject>();
 
     int turn = 0;
 
+    public GameObject checkSpice(GameObject input)
+    {
+        FieldOperator fieldController = input.GetComponent<FieldOperator>();
+        SpiceOperator spiceController;
+
+        for (int i = 0; i < rootSpice.Count; i++)
+        {
+            spiceController = rootSpice[i].GetComponent<SpiceOperator>();
+            if(fieldController.positionX == spiceController.positionX && fieldController.positionY == spiceController.positionY)
+            {
+                return (rootSpice[i]);
+            }
+        }
+        return (null);
+    }
     public void enemyTurnMovements()
     {
         CharacterOperator characterController;
@@ -112,6 +129,10 @@ public class BoardOperator : MonoBehaviour
 
         characters.Add(input);
     }
+    public void setSpice(GameObject input)
+    {
+        rootSpice.Add(input);
+    }
     public GameObject getField(int X, int Y)
     {
         return (fields[X][Y]);
@@ -201,6 +222,10 @@ public class BoardOperator : MonoBehaviour
     public List<GameObject> charactersInRange(GameObject start, int range)
     {
         List<GameObject> output = new List<GameObject>();
+        List<List<GameObject>> directions = new List<List<GameObject>>();
+
+
+
         return (output);
     }
     void createBoard()
@@ -236,6 +261,10 @@ public class BoardOperator : MonoBehaviour
         {
             playerComponent.fieldComponent = fieldComponent;
         }
+    }
+    private void Awake()
+    {
+
     }
     void Start()
     {

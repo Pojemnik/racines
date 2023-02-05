@@ -84,10 +84,24 @@ public class PlayerOperator : MonoBehaviour
     {
         Movements = boardComponent.getPossibleMovements(characterComponent.field, new List<GameObject>(), characterComponent.moveRange, characterComponent.moveRange, new List<List<GameObject>>());
         Arrows = new List<GameObject>();
-        for(int i = 0; i < Movements.Count; i++)
+        if(Movements.Count != 0)
         {
-            Arrows.Add(createArrow(Movements[i][Movements[i].Count - 1]));
+            for (int i = 0; i < Movements.Count; i++)
+            {
+                Arrows.Add(createArrow(Movements[i][Movements[i].Count - 1]));
+            }
         }
+        else
+        {
+            deselect();
+            characterComponent.moved = true;
+        }
+    }
+    public void spicePickup(GameObject spice)
+    {
+        SpiceOperator spiceController = spice.GetComponent<SpiceOperator>();
+
+        spiceController.caryingCharacter = gameObject;
     }
     private void OnMouseDown()
     {

@@ -141,7 +141,7 @@ public class CharacterOperator : MonoBehaviour
             if (boardComponent.characters[i] == gameObject)
             {
                 boardComponent.characters.RemoveAt(i);
-                i++;
+                i--;
             }
         }
         Destroy(gameObject);

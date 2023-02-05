@@ -18,7 +18,9 @@ public class PlayerOperator : MonoBehaviour
     public List<List<GameObject>> Movements;
     [HideInInspector]
     public List<GameObject> Arrows;
-
+    [HideInInspector]
+    public GameObject carriedSpice = null;
+    [HideInInspector]
     bool isSelected = false;
     [HideInInspector]
     public CharacterOperator characterComponent;
@@ -99,9 +101,13 @@ public class PlayerOperator : MonoBehaviour
     }
     public void spicePickup(GameObject spice)
     {
-        SpiceOperator spiceController = spice.GetComponent<SpiceOperator>();
+        if (carriedSpice == null)
+        {
+            SpiceOperator spiceController = spice.GetComponent<SpiceOperator>();
 
-        spiceController.caryingCharacter = gameObject;
+            spiceController.caryingCharacter = gameObject;
+            carriedSpice = spice;
+        }
     }
     private void OnMouseDown()
     {

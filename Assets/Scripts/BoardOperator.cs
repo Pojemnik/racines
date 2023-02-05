@@ -241,6 +241,7 @@ public class BoardOperator : MonoBehaviour
         characters[type].transform.SetPositionAndRotation(new Vector3(FieldSize * X, fieldComponent.FieldHeight, FieldSize * Y), new Quaternion());
         characterComponent = characters[type].GetComponent<CharacterOperator>();
         characterComponent.setField(fields[X][Y]);
+        characterComponent.transform.SetPositionAndRotation(new Vector3((int)Mathf.Round(gameObject.transform.position.x), 0, (int)Mathf.Round(gameObject.transform.position.z)), transform.rotation);
     }
     public void setupCharacter(GameObject input)
     {

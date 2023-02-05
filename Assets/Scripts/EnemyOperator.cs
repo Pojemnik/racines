@@ -57,7 +57,10 @@ public class EnemyOperator : MonoBehaviour
                 }
                 characterComponent.declareMovement(attackPath);
             }
-            playerComponent.kill();
+            else
+            {
+                playerComponent.kill();
+            }
         }
         else
         {

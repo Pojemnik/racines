@@ -82,6 +82,7 @@ public class BoardOperator : MonoBehaviour
             }
             turn = 0;
         }
+        print(turn);
         for(int i = 0; i < characters.Count; i++)
         {
             characterController = characters[i].GetComponent<CharacterOperator>();

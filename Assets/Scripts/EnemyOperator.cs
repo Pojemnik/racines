@@ -29,9 +29,15 @@ public class EnemyOperator : MonoBehaviour
     }
     public void spicePickup(GameObject spice)
     {
-        SpiceOperator spiceController = spice.GetComponent<SpiceOperator>();
-
-        spiceController.caryingCharacter = gameObject;
+        for(int i = 0; i < boardComponent.rootSpice.Count; i++)
+        {
+            if(boardComponent.rootSpice[i] == spice)
+            {
+                boardComponent.rootSpice.RemoveAt(i);
+                i--;
+            }
+        }
+        Destroy(spice);
     }
     private void Awake()
     {

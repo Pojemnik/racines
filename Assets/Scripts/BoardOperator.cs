@@ -28,7 +28,7 @@ public class BoardOperator : MonoBehaviour
         for (int i = 0; i < rootSpice.Count; i++)
         {
             spiceController = rootSpice[i].GetComponent<SpiceOperator>();
-            if(fieldController.positionX == spiceController.positionX && fieldController.positionY == spiceController.positionY)
+            if(fieldController.positionX == spiceController.positionX && fieldController.positionY == spiceController.positionY && spiceController.caryingCharacter == null)
             {
                 return (rootSpice[i]);
             }

@@ -65,6 +65,7 @@ public class CharacterOperator : MonoBehaviour
         }
         if(pathStep >= destinationField.Count)
         {
+            print(field.transform.position);
             transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z));
             spice = boardComponent.checkSpice(field);
             if (spice != null)

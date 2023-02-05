@@ -59,6 +59,7 @@ public class EnemyOperator : MonoBehaviour
             }
             else
             {
+                characterComponent.moved = true;
                 playerComponent.kill();
             }
         }
@@ -67,6 +68,10 @@ public class EnemyOperator : MonoBehaviour
             if (Movements.Count != 0)
             {
                 characterComponent.declareMovement(Movements[Random.Range(0, Movements.Count)]);
+            }
+            else
+            {
+                characterComponent.moved = true;
             }
         }
     }

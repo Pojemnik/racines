@@ -16,6 +16,31 @@ public class SpiceOperator : MonoBehaviour
     [HideInInspector]
     public GameObject board;
 
+    public void drop()
+    {
+        BoardOperator boardController = FindObjectOfType<BoardOperator>();
+        PlayerOperator playerComponent = caryingCharacter.GetComponent<PlayerOperator>();
+        CharacterOperator characterComponent = caryingCharacter.GetComponent<CharacterOperator>();
+        FieldOperator fieldComponent;
+
+        if (playerComponent != null)
+        {
+            playerComponent.carriedSpice = null;
+            for (int i = 0; i < boardController.rootSpice.Count; i++)
+            {
+                if (boardController.rootSpice[i] == gameObject)
+                {
+                    boardController.rootSpice.RemoveAt(i);
+                    i++;
+                }
+            }
+            playerComponent.sayDrop();
+            fieldComponent = characterComponent.field.GetComponent<FieldOperator>();
+            positionX = fieldComponent.positionX;
+            positionY = fieldComponent.positionY;
+            transform.SetPositionAndRotation(characterComponent.field.transform.position, Quaternion.Euler(0, 0, 0));
+        }
+    }
     public void Score()
     {
         BoardOperator boardController = FindObjectOfType<BoardOperator>();

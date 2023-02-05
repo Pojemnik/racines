@@ -17,6 +17,8 @@ public class PlayerOperator : MonoBehaviour
     [SerializeField]
     public List<AudioClip> VoicelinesDrop;
     [SerializeField]
+    public List<AudioClip> VoicelinesDie;
+    [SerializeField]
     public GameObject ArrowPrefab;
     [HideInInspector]
     public List<List<GameObject>> Movements;
@@ -35,6 +37,11 @@ public class PlayerOperator : MonoBehaviour
     [HideInInspector]
     public AudioSource audioComponent;
 
+    public void sayDie()
+    {
+        audioComponent.clip = VoicelinesDie[Random.Range(0, VoicelinesDie.Count)];
+        audioComponent.Play();
+    }
     public void sayPick()
     {
         audioComponent.clip = VoicelinesPick[Random.Range(0, VoicelinesPick.Count)];
@@ -54,6 +61,11 @@ public class PlayerOperator : MonoBehaviour
     {
         audioComponent.clip = VoicelinesYes[Random.Range(0, VoicelinesYes.Count)];
         audioComponent.Play();
+    }
+    public void kill()
+    {
+        sayDie();
+        characterComponent.kill();
     }
     public void deselect()
     {

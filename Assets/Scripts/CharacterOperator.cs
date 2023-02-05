@@ -119,6 +119,32 @@ public class CharacterOperator : MonoBehaviour
             enemyController.spicePickup(spice);
         }
     }
+    public void kill()
+    {
+        FieldOperator fieldComponent = field.GetComponent<FieldOperator>();
+        BoardOperator boardComponent = fieldComponent.board.GetComponent<BoardOperator>();
+        PlayerOperator playerComponent = gameObject.GetComponent<PlayerOperator>();
+        SpiceOperator spiceComponent;
+
+        fieldComponent.character = null;
+        if(playerComponent != null)
+        {
+            if(playerComponent.carriedSpice != null)
+            {
+                spiceComponent = playerComponent.carriedSpice.GetComponent<SpiceOperator>();
+                spiceComponent.drop();
+            }
+        }
+        for(int i = 0; i < boardComponent.characters.Count; i++)
+        {
+            if (boardComponent.characters[i] == gameObject)
+            {
+                boardComponent.characters.RemoveAt(i);
+                i++;
+            }
+        }
+        Destroy(gameObject);
+    }
     private void Awake()
     {
         BoardOperator boardController = FindObjectOfType<BoardOperator>();
@@ -131,6 +157,9 @@ public class CharacterOperator : MonoBehaviour
 
     void Update()
     {
-        move();
+        if(field != destinationField[destinationField.Count - 1])
+        {
+            move();
+        }
     }
 }

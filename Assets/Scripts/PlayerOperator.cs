@@ -111,7 +111,6 @@ public class PlayerOperator : MonoBehaviour
             }
         }
         deselect();
-        characterComponent.moved = true;
     }
     public void createPossibilities()
     {

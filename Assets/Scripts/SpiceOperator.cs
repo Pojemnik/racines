@@ -43,7 +43,7 @@ public class SpiceOperator : MonoBehaviour
             transform.SetPositionAndRotation(characterComponent.field.transform.position, Quaternion.Euler(0, 0, 0));
         }
     }
-    public void Score()
+    public void score()
     {
         BoardOperator boardController = FindObjectOfType<BoardOperator>();
         PlayerOperator playerComponent = caryingCharacter.GetComponent<PlayerOperator>();

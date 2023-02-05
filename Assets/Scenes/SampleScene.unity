@@ -5560,6 +5560,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6900559681183990856, guid: 34bd50122ab120149aa7419219d3eee4, type: 3}
+      propertyPath: Turns
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900559681183990856, guid: 34bd50122ab120149aa7419219d3eee4, type: 3}
       propertyPath: BoardSizeX
       value: 2
       objectReference: {fileID: 0}
